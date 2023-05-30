@@ -62,6 +62,14 @@
                                 </group>
                             </group>
                         </page>
+                        <page string="Otra infirmación">
+                            <group>
+                                <group>
+                                    <field name="salesperson"/>
+                                    <field name="buyer"/>
+                                </group>
+                            </group>
+                        </page>
                     </notebook>
                 </sheet>
             </form>
