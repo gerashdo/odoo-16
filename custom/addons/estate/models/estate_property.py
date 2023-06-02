@@ -1,4 +1,4 @@
-from odoo import fields, models, api
+from odoo import fields, models, api, exceptions
 from dateutil.relativedelta import relativedelta 
 
 class EstateProperty(models.Model):
@@ -67,12 +67,18 @@ class EstateProperty(models.Model):
 
     def set_as_sold(self):
         for record in self:
-            record.state = 'sold'
+            if not record.state == 'canceled':
+                record.state = 'sold'
+            else:
+                raise exceptions.UserError('Propiedades canceladas no pueden ser vendidas')
         
         return True
     
     def set_as_canceled(self):
         for record in self:
-            record.state = 'canceled'
+            if not record.state == 'sold':
+                record.state = 'canceled'
+            else:
+                raise exceptions.UserError('Propiedades vendidas no pueden ser canceladas')
 
         return True
