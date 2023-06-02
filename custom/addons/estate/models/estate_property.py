@@ -43,6 +43,11 @@ class EstateProperty(models.Model):
     total_area = fields.Integer(compute="_compute_total_area", string="Área total")
     best_price = fields.Float(string="Mejor Oferta", compute="_compute_best_price")
 
+    _sql_constraints = [
+        ('check_expected_price','CHECK(expected_price > 0)','El precio esperado debe ser un numero positivo'),
+        ('check_selling_price','CHECK(selling_price > 0)','El precio de venta debe ser positivo'),
+    ]
+
     @api.depends("living_area", "garden_area")
     def _compute_total_area(self):
         for record in self:

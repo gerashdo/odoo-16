@@ -5,3 +5,7 @@ class PropertyTag(models.Model):
     _description = "Tag for properties"
 
     name = fields.Char(string="Nombre")
+
+    _sql_constraints = [
+        ('name_unique','UNIQUE(name)','El nombre debe ser único')
+    ]
