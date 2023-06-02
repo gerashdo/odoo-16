@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import models, fields, api, exceptions
 from dateutil.relativedelta import relativedelta 
 
 class PropertyOffer(models.Model):
@@ -30,3 +30,21 @@ class PropertyOffer(models.Model):
             creation_date = fields.Date.from_string(record.create_date) or fields.Date.today()
             end_date = fields.Date.from_string(record.date_deadline)
             record.validity = (end_date - creation_date).days 
+
+    def accept_offer(self):
+        for record in self:
+            if not record.status == 'refused':
+                record.status = 'accepted'
+                record.property_id.selling_price = record.price
+                record.property_id.buyer = record.partner_id
+            else:
+                raise exceptions.UserError('La oferta ya ha sido rechazada')
+        
+        return True
+    
+    def reject_offer(self):
+        for record in self:
+            if not record.status == 'accepted':
+                record.status = 'refused'
+            else:
+                raise exceptions.UserError('La oferta ya ha sido aceptada')

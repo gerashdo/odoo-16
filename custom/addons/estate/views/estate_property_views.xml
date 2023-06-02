@@ -119,6 +119,8 @@
                 <field name="validity"/>
                 <field name="date_deadline"/>
                 <field name="status"/>
+                <button name="accept_offer" type="object" string="Aceptar" icon="fa-check"/>
+                <button name="reject_offer" type="object" string="Rechazar" icon="fa-times"/>
             </tree>
         </field>
     </record>
