@@ -155,6 +155,17 @@
             <form string="New Property Type">
                 <sheet>
                     <field name="name" nolabel="1"/>
+                    <notebook>
+                        <page name="Propiedades">
+                            <field name="property_ids" nolabel="1">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="expected_price"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>
