@@ -38,8 +38,8 @@ class PropertyOffer(models.Model):
     def accept_offer(self):
         for record in self:
             if not record.status == 'refused':
-                record.status = 'accepted'
                 record.property_id.selling_price = record.price
+                record.status = 'accepted'
                 record.property_id.buyer = record.partner_id
             else:
                 raise exceptions.UserError('La oferta ya ha sido rechazada')

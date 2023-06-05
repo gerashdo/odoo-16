@@ -1,4 +1,5 @@
 from odoo import fields, models, api, exceptions
+from odoo.tools import float_compare
 from dateutil.relativedelta import relativedelta 
 
 class EstateProperty(models.Model):
@@ -87,3 +88,11 @@ class EstateProperty(models.Model):
                 raise exceptions.UserError('Propiedades vendidas no pueden ser canceladas')
 
         return True
+    
+    @api.constrains('selling_price')
+    def _check_selling_price_lower_than_ninety_percent(self):
+        for record in self:
+            if record.selling_price > 0 \
+                    and float_compare(record.selling_price, record.expected_price * 0.9, precision_digits=2) < 0:
+                raise exceptions.ValidationError("La oferta debe ser al menos del 90% del precio esperado")
+                
