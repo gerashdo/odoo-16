@@ -7,4 +7,5 @@ class PropertyType(models.Model):
 
     name = fields.Char('Nombre', required=True)
     property_ids = fields.One2many("estate.property", "property_type_id", readonly=True)
+    sequence = fields.Integer('Sequence', default=1)
     
