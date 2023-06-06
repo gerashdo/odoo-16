@@ -119,7 +119,7 @@
         <field name="name">Offers</field>
         <field name="model">estate.property.offer</field>
         <field name="arch" type="xml">
-            <tree string="Ofertas">
+            <tree string="Ofertas" editable="bottom">
                 <field name="price"/>
                 <field name="partner_id"/>
                 <field name="validity"/>
@@ -150,6 +150,17 @@
         </field>
     </record>
 
+    <record id="estate_property_tag_view_tree" model="ir.ui.view">
+        <field name="name">estate.property.tag.tree</field>
+        <field name="model">estate.property.tag</field>
+        <field name="arch" type="xml">
+            <tree string="Property Tags" editable="bottom">
+                <field name="name"/>
+                <field name="color"/>
+            </tree>
+        </field>
+    </record>
+
     <record id="estate_property_view_tree" model="ir.ui.view">
         <field name="name">estate.property.tree</field>
         <field name="model">estate.property</field>
@@ -165,12 +176,6 @@
                 <field name="date_availability" string="Disponible desde"/>
             </tree>
         </field>
-    </record>
-
-    <record id="estate_property_action" model="ir.actions.act_window">
-        <field name="name">Properties</field>
-        <field name="res_model">estate.property</field>
-        <field name="view_mode">tree,form</field>
     </record>
 
     <record id="estate_property_type_view_from" model="ir.ui.view">
@@ -194,6 +199,12 @@
                 </sheet>
             </form>
         </field>
+    </record>
+
+    <record id="estate_property_action" model="ir.actions.act_window">
+        <field name="name">Properties</field>
+        <field name="res_model">estate.property</field>
+        <field name="view_mode">tree,form</field>
     </record>
 
     <record id="estate_property_type_action" model="ir.actions.act_window">
