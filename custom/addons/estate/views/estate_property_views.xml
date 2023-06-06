@@ -90,14 +90,16 @@
                                     <field name="facades"/>
                                     <field name="garage"/>
                                     <field name="garden"/>
-                                    <field name="garden_area"/>
-                                    <field name="garden_orientation"/>
+                                    <field name="garden_area" attrs="{'invisible':[('garden','=',False)]}"/>
+                                    <field name="garden_orientation" attrs="{'invisible':[('garden','=',False)]}"/>
                                     <field name="total_area"/>
                                 </group>
                             </group>
                         </page>
                         <page string="Ofertas">
-                            <field name="offer_ids" nolabel="1"/>
+                            <field name="offer_ids" 
+                                nolabel="1"
+                                attrs="{'readonly':[('state','in',['offer_accepted','sold','canceled'])]}"/>
                         </page>
                         <page string="Otra infirmación">
                             <group>
@@ -123,8 +125,16 @@
                 <field name="validity"/>
                 <field name="date_deadline"/>
                 <field name="status"/>
-                <button name="accept_offer" type="object" string="Aceptar" icon="fa-check"/>
-                <button name="reject_offer" type="object" string="Rechazar" icon="fa-times"/>
+                <button name="accept_offer" 
+                    type="object" 
+                    string="Aceptar" 
+                    icon="fa-check"
+                    attrs="{'invisible':[('status','in',['accepted','refused'])]}"/>
+                <button name="reject_offer" 
+                    type="object" 
+                    string="Rechazar" 
+                    icon="fa-times"
+                    attrs="{'invisible':[('status','in',['accepted','refused'])]}"/>
             </tree>
         </field>
     </record>
