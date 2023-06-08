@@ -71,6 +71,11 @@ class EstateProperty(models.Model):
         else:
             self.garden_area = 0
             self.garden_orientation = None
+    
+    # @api.onchange('buyer')
+    # def _onchange_buyer(self):
+    #     if self.buyer:
+    #         self.state = "offer_accepted"
 
     def set_as_sold(self):
         for record in self:
@@ -96,4 +101,9 @@ class EstateProperty(models.Model):
             if record.selling_price > 0 \
                     and float_compare(record.selling_price, record.expected_price * 0.9, precision_digits=2) < 0:
                 raise exceptions.ValidationError("La oferta debe ser al menos del 90% del precio esperado")
+            
+    @api.ondelete(at_uninstall=False)
+    def _ulink_if_is_new_or_canceled(self):
+        if(property.state not in ['new','canceled'] for property in self):
+            raise exceptions.UserError('La propiedad no es nueva ni esta cancelada')
                 
