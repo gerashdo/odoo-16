@@ -50,11 +50,11 @@
                     <button name="set_as_sold" 
                         type="object" 
                         string="Vendida"
-                        states="new, offer_accepted, offer_received"/>
+                        attrs="{'invisible':['!',('state','in',['new','offer_accepted','offer_received'])]}"/>
                     <button name="set_as_canceled" 
                         type="object" 
                         string="Cancelar"
-                        states="new, offer_received"/>
+                        attrs="{'invisible':['!',('state','in',['new','offer_received'])]}"/>
                     <field name="state" readonly="1" widget="statusbar" nolabel="1" statusbar_visible="new,offer_received,offer_accepted,sold"/>
                 </header>
                 <sheet>
